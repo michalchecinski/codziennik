@@ -5,6 +5,8 @@ using System.Text;
 
 using Xamarin.Forms;
 
+using Codziennik.Views;
+
 namespace Codziennik
 {
     public partial class App : Application
@@ -13,7 +15,8 @@ namespace Codziennik
         {
             InitializeComponent();
 
-            MainPage = new Codziennik.MainPage();
+            MainPage = new ShowEntryPage();
+
         }
 
         protected override void OnStart()

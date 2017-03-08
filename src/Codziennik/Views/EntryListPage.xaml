@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Codziennik.Views.EntryListPage"
+             Padding="0,10,0,0"
+             Title = "Lista wpisów">
+  
+  
+  <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand">
+          <Label  Text="Lista dotychczasowych wpisów:"
+            HorizontalOptions="Center"
+            FontSize="Large"
+            FontAttributes="Bold"
+            Margin="0,20,0,20"  />
+            <ListView x:Name="entryListView" VerticalOptions="FillAndExpand" SeparatorVisibility="Default" Margin="10,0,10,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>                        
+                          <StackLayout Orientation="Horizontal">
+                            <StackLayout Orientation="Vertical">
+                                <Label Text="{Binding entryDate}" FontSize="Medium" />
+                            </StackLayout>
+                        </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>
