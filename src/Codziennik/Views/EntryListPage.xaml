@@ -19,7 +19,7 @@
                         <ViewCell>                        
                           <StackLayout Orientation="Horizontal">
                             <StackLayout Orientation="Vertical">
-                                <Label Text="{Binding entryDate}" FontSize="Medium" />
+                                <Label Text="{Binding entryDateString}" FontSize="Medium" />
                             </StackLayout>
                         </StackLayout>
                         </ViewCell>

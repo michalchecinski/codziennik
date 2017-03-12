@@ -15,7 +15,7 @@ namespace Codziennik
         {
             InitializeComponent();
 
-            MainPage = new ShowEntryPage();
+            MainPage = new EntryListPage();
 
         }
 

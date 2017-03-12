@@ -2,15 +2,18 @@
 
 namespace Codziennik.Models
 {
-    class Entry
+    public class Entry
     {
-        public DateTime entryDate { get; set; }
+        public DateTime entryDate { get; private set; }
 
-        public string entryContent { get; set; }
+        public string entryContent { get; private set; }
 
-        public Entry(string entryContent, DateTime entrytDate)
+        public string entryDateString { get; private set; }
+
+        public Entry(string entryContent, DateTime entryDate)
         {
             this.entryDate = entryDate;
+            entryDateToString();
             this.entryContent = entryContent;
         }
 
@@ -20,9 +23,15 @@ namespace Codziennik.Models
             this.entryContent = entryContent;
         }
 
-        public void SetEntryDate()
+        private void SetEntryDate()
         {
             entryDate = DateTime.Now;
+            entryDateToString();
+        }
+
+        private void entryDateToString()
+        {
+            entryDateString = entryDate.ToString("dd.MM.yyyy HH:mm");
         }
 
     }

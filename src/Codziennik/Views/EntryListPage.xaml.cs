@@ -21,6 +21,11 @@ namespace Codziennik.Views
                 new Models.Entry("Kolejny wpis", new DateTime(2016, 12, 28)),
                 new Models.Entry("Content", new DateTime(2010, 5, 12))
             };
+
+            for (int i = 1; i < 20; i++)
+            {
+                entries.Add(new Models.Entry($"{i} wpis", new DateTime(2017, 03, i)));
+            }
          
             entryListView.ItemsSource = entries;
         }

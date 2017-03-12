@@ -13,7 +13,7 @@
         <Editor Text="Dzisiaj zdarzyło się..." 
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="Fill"
-                x:Name="WhatHappenedEditor"  />
+                x:Name="WhatHappenedEditor" />
 
         <Button Text="Zapisz"
            VerticalOptions="Center"
