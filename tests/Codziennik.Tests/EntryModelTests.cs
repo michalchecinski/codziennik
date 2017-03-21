@@ -14,8 +14,8 @@ namespace Codziennik.Tests
         {
             Models.Entry testEntry = new Models.Entry("Testowy wpis");
 
-            Assert.Equal(testEntry.entryContent, "Testowy wpis");
-            Assert.Equal(testEntry.entryDateString, DateTime.Now.ToString("dd.MM.yyyy HH:mm"));
+            Assert.Equal(testEntry.EntryContent, "Testowy wpis");
+            Assert.Equal(testEntry.EntryDateString, DateTime.Now.ToString("dd.MM.yyyy HH:mm"));
         }
 
         [Fact]
@@ -23,8 +23,8 @@ namespace Codziennik.Tests
         {
             Models.Entry testEntry = new Models.Entry("Test", new DateTime(2017, 01, 01));
 
-            Assert.Equal(testEntry.entryDate, new DateTime(2017, 01, 01));
-            Assert.Equal(testEntry.entryContent, "Test");
+            Assert.Equal(testEntry.EntryDate, new DateTime(2017, 01, 01));
+            Assert.Equal(testEntry.EntryContent, "Test");
         }
 
         [Fact]
@@ -32,8 +32,8 @@ namespace Codziennik.Tests
         {
             Models.Entry testEntry = new Models.Entry("Test", new DateTime(2017, 02, 01, 22, 11, 00));
 
-            Assert.Equal(testEntry.entryDateString, "01.02.2017 22:11");
-            Assert.Equal(testEntry.entryContent, "Test");
+            Assert.Equal(testEntry.EntryDateString, "01.02.2017 22:11");
+            Assert.Equal(testEntry.EntryContent, "Test");
         }
         
     }

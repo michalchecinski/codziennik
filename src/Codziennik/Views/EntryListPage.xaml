@@ -8,18 +8,14 @@
   
   <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand">
-          <Label  Text="Lista dotychczasowych wpisów:"
-            HorizontalOptions="Center"
-            FontSize="Large"
-            FontAttributes="Bold"
-            Margin="0,20,0,20"  />
-            <ListView x:Name="entryListView" VerticalOptions="FillAndExpand" SeparatorVisibility="Default" Margin="10,0,10,0">
+            <ListView x:Name="entryListView" VerticalOptions="FillAndExpand" SeparatorVisibility="Default" Margin="10,0,10,0"
+                     >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>                        
                           <StackLayout Orientation="Horizontal">
                             <StackLayout Orientation="Vertical">
-                                <Label Text="{Binding entryDateString}" FontSize="Medium" />
+                                <Label Text="{Binding EntryDateString}" FontSize="Medium" />
                             </StackLayout>
                         </StackLayout>
                         </ViewCell>

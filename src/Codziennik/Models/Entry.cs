@@ -4,34 +4,34 @@ namespace Codziennik.Models
 {
     public class Entry
     {
-        public DateTime entryDate { get; private set; }
+        public DateTime EntryDate { get; private set; }
 
-        public string entryContent { get; private set; }
+        public string EntryContent { get; private set; }
 
-        public string entryDateString { get; private set; }
+        public string EntryDateString { get; private set; }
 
         public Entry(string entryContent, DateTime entryDate)
         {
-            this.entryDate = entryDate;
+            this.EntryDate = entryDate;
             entryDateToString();
-            this.entryContent = entryContent;
+            this.EntryContent = entryContent;
         }
 
         public Entry(string entryContent)
         {
             SetEntryDate();
-            this.entryContent = entryContent;
+            this.EntryContent = entryContent;
         }
 
         private void SetEntryDate()
         {
-            entryDate = DateTime.Now;
+            EntryDate = DateTime.Now;
             entryDateToString();
         }
 
         private void entryDateToString()
         {
-            entryDateString = entryDate.ToString("dd.MM.yyyy HH:mm");
+            EntryDateString = EntryDate.ToString("dd.MM.yyyy HH:mm");
         }
 
     }

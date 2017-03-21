@@ -14,6 +14,13 @@ namespace Codziennik.Views
         {
             InitializeComponent();
 
+            //async void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
+            //{
+            //    await Navigation.PushAsync(new ShowEntryPage()
+            //        BindingContext e.SelectedItem as Models.Entry()
+            //        );
+            //}
+
             List<Models.Entry> entries = new List<Models.Entry>
             {
                 new Models.Entry("Pierwszy wpis"),
@@ -21,11 +28,6 @@ namespace Codziennik.Views
                 new Models.Entry("Kolejny wpis", new DateTime(2016, 12, 28)),
                 new Models.Entry("Content", new DateTime(2010, 5, 12))
             };
-
-            for (int i = 1; i < 20; i++)
-            {
-                entries.Add(new Models.Entry($"{i} wpis", new DateTime(2017, 03, i)));
-            }
          
             entryListView.ItemsSource = entries;
         }
