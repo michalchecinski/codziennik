@@ -10,9 +10,12 @@ namespace Codziennik.Views
 {
     public partial class ShowEntryPage : ContentPage
     {
-        public ShowEntryPage()
+        public ShowEntryPage(Models.Entry entry)
         {
             InitializeComponent();
+
+            EntryDateLabel.Text = entry.EntryDateString;
+            EntryContentLabel.Text = entry.EntryContent;
         }
     }
 }

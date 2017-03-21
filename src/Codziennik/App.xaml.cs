@@ -15,14 +15,11 @@ namespace Codziennik
         {
             InitializeComponent();
 
-            var master = new EntryListPage();
-
-            var nav = new NavigationPage(master)
+            MainPage = new NavigationPage(new EntryListPage())
             {
                 Title = "Lista wpisów",
                 BarBackgroundColor = Color.FromHex("23b2dd")
             };
-            MainPage = nav;
 
         }
 

@@ -14,12 +14,15 @@ namespace Codziennik.Views
         {
             InitializeComponent();
 
-            //async void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
-            //{
-            //    await Navigation.PushAsync(new ShowEntryPage()
-            //        BindingContext e.SelectedItem as Models.Entry()
-            //        );
-            //}
+            var toolbarItem = new ToolbarItem
+            {
+                Text = "+"
+            };
+            toolbarItem.Clicked += async (sender, e) =>
+            {
+                await Navigation.PushAsync(new NewEntryPage());
+            };
+            ToolbarItems.Add(toolbarItem);
 
             List<Models.Entry> entries = new List<Models.Entry>
             {
@@ -30,6 +33,15 @@ namespace Codziennik.Views
             };
          
             entryListView.ItemsSource = entries;
+
+            entryListView.ItemTapped += async (sender, e) =>
+            {
+                var item = e.Item as Models.Entry;
+                if (item == null)
+                    return;
+                await Navigation.PushAsync(new ShowEntryPage(item));
+                entryListView.SelectedItem = null;
+            };
         }
     }
 }

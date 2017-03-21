@@ -8,8 +8,7 @@
   
   <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand">
-            <ListView x:Name="entryListView" VerticalOptions="FillAndExpand" SeparatorVisibility="Default" Margin="10,0,10,0"
-                     >
+            <ListView x:Name="entryListView" VerticalOptions="FillAndExpand" SeparatorVisibility="Default" Margin="10,0,10,0"   >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>                        

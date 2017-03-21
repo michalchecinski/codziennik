@@ -4,16 +4,16 @@
              x:Class="Codziennik.Views.ShowEntryPage">
 
   <StackLayout>
-    <Label  Text="{Binding EntryDateString}"
-            HorizontalOptions="Center"
+    <Label  HorizontalOptions="Center"
             FontSize="Large"
             FontAttributes="Bold"
-            Margin="0,20,0,0"  />
+            Margin="0,20,0,0"
+            x:Name ="EntryDateLabel"/>
     
     <Label  VerticalOptions="FillAndExpand"
             HorizontalOptions="Fill"
             Margin="20,20,0,0"
-            Text="{Binding EntryContent}"/>
+            x:Name ="EntryContentLabel"/>
     
   </StackLayout>
   
