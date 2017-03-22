@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Codziennik.Tests
 {
-    class DataStorageTests
+    public class DataStorageTests
     {
+        
     }
 }

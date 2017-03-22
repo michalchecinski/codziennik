@@ -24,6 +24,8 @@ namespace Codziennik.Views
             };
             ToolbarItems.Add(toolbarItem);
 
+            
+
             List<Models.Entry> entries = new List<Models.Entry>
             {
                 new Models.Entry("Pierwszy wpis"),

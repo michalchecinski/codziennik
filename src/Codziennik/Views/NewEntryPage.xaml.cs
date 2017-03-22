@@ -17,9 +17,12 @@ namespace Codziennik.Views
 
         void SaveButtonClicked(object sender, EventArgs e)
         {
-            string EditorText = WhatHappenedEditor.Text;
-            if(EditorText != null)
-                DisplayAlert("Zapisz", "Naciśnięto przycisk zapisywania", "OK");
+            if(WhatHappenedEditor.Text != null)
+            {
+                Models.Entry newEntry = new Models.Entry(WhatHappenedEditor.Text, DateTime.Now);
+                DisplayAlert("Zapisano", "", "OK");
+                
+            }
             else
                 DisplayAlert("Błąd!", "Wprowadź tekst do zapisania", "OK");
         }
