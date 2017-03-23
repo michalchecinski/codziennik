@@ -1,4 +1,6 @@
-﻿using PCLStorage;
+﻿using Codziennik.Models;
+using Newtonsoft.Json;
+using PCLStorage;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,32 +12,46 @@ namespace Codziennik.Data
 {
     class DataStorage
     {
-        public string FolderPath { get; private set; }
-
-        public async Task WriteFile()
+        public async static Task WriteAllEntries(List<Entry> entriesList)
         {
-            IFolder rootFolder = FileSystem.Current.LocalStorage;
 
-            IFolder folder = await rootFolder.CreateFolderAsync("MySubFolder", CreationCollisionOption.OpenIfExists);
+            IFolder folder = await FileSystem.Current.LocalStorage.CreateFolderAsync("CodziennikFiles", CreationCollisionOption.OpenIfExists);
 
-            FolderPath = folder.Path;
+            IFile file = await folder.CreateFileAsync("entries", CreationCollisionOption.ReplaceExisting);
 
-            IFile file = await folder.CreateFileAsync("MyFile.txt", CreationCollisionOption.OpenIfExists);
-
-            await file.WriteAllTextAsync("Sample Text...");
+            await file.WriteAllTextAsync(JsonConvert.SerializeObject(entriesList));
         }
 
-     //   public async static Task<string> ReadAllTextAsync(this string fileName, IFolder rootFolder = null)  
-     //{  
-     //    string content = "";  
-     //    IFolder folder = FileSystem.Current.LocalStorage.;  
-     //    bool exist = await fileName.IsFileExistAsync(folder);  
-     //    if (exist == true)  
-     //    {  
-     //        IFile file = await folder.GetFileAsync(fileName);  
-     //        content = await file.ReadAllTextAsync();  
-     //    }  
-     //    return content;  
-     //}  
+        public async static Task<List<Entry>> ReadAllEntries()
+        {
+            IFolder folder = await FileSystem.Current.LocalStorage.CreateFolderAsync("CodziennikFiles", CreationCollisionOption.OpenIfExists);
+
+            if ( (await folder.CheckExistsAsync("entries") ) == ExistenceCheckResult.FileExists )
+            {
+                IFile file = await folder.GetFileAsync("entries");
+                List<Entry> EntriesList = JsonConvert.DeserializeObject<List<Entry>>(await file.ReadAllTextAsync());
+                return EntriesList;
+            }
+            else
+                return new List<Entry>();
+        }
+
+        public async static Task WriteOneEntry(Entry newEntry)
+        {
+            List<Entry> entriesList = await ReadAllEntries();
+
+            entriesList.Add(newEntry);
+
+            await WriteAllEntries(entriesList);
+
+        }
+
+        public async static Task DeleteEntry(Entry entryToDelete)
+        {
+            List<Entry> entriesList = await ReadAllEntries();
+
+            if(entriesList.Remove(entryToDelete))
+                await WriteAllEntries(entriesList);
+        }
     }
 }
