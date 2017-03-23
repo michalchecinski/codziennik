@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace Codziennik.Models
 {
@@ -7,7 +8,9 @@ namespace Codziennik.Models
     {
         public DateTime EntryDate { get; set; }
 
-        public string EntryContent { get; set; }
+        public List<string> Answers { get; set; }
+
+        public List<string> Questions { get; set; }
 
         [JsonIgnore]
         public string EntryDateString {
@@ -17,14 +20,9 @@ namespace Codziennik.Models
             }
         }
 
-        public Entry(string entryContent)
-        {
-            SetEntryDateNow();
-            this.EntryContent = entryContent;
-        }
-
         public Entry()
         {
+            SetEntryDateNow();
         }
 
         private void SetEntryDateNow()
@@ -42,5 +40,12 @@ namespace Codziennik.Models
             else
                 return (this.EntryDate.Equals(objAsEntry.EntryDate) && this.EntryContent.Equals(objAsEntry.EntryContent));
         }
+
+
+        public override int GetHashCode()
+        {
+            return 17 * (EntryDate.GetHashCode() + Answers.GetHashCode());
+        }
+
     }
 }
