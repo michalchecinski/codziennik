@@ -5,14 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using Codziennik.Models;
 using Xamarin.Forms;
+using Codziennik.Data;
 
 namespace Codziennik.Views
 {
     public partial class EntryListPage : ContentPage
     {
+
         public EntryListPage()
         {
             InitializeComponent();
+
+            entryListView.IsPullToRefreshEnabled = true;
+            entryListView.RefreshCommand = new Command(async () =>
+            {
+                await LoadData();
+                entryListView.IsRefreshing = false;
+            });
 
             var toolbarItem = new ToolbarItem
             {
@@ -24,16 +33,6 @@ namespace Codziennik.Views
             };
             ToolbarItems.Add(toolbarItem);
 
-            List<Models.Entry> entries = new List<Models.Entry>
-            {
-                new Models.Entry("Pierwszy wpis"),
-                new Models.Entry("Drugi wpis", new DateTime(2017, 02, 02)),
-                new Models.Entry("Kolejny wpis", new DateTime(2016, 12, 28)),
-                new Models.Entry("Content", new DateTime(2010, 5, 12))
-            };
-         
-            entryListView.ItemsSource = entries;
-
             entryListView.ItemTapped += async (sender, e) =>
             {
                 var item = e.Item as Models.Entry;
@@ -43,5 +42,31 @@ namespace Codziennik.Views
                 entryListView.SelectedItem = null;
             };
         }
-    }
+
+        async private Task LoadData()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+
+            List<Models.Entry> list = await DataStorage.ReadAllEntries();
+
+            entryListView.ItemsSource = list;
+
+            if (list.Count == 0)
+                await DisplayAlert("Brak wpisów", "Dodaj swój pierwszy wpis!", "OK");
+
+            IsBusy = false;
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            await LoadData();
+            
+        }
+
+        }
 }

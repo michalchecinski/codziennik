@@ -6,6 +6,7 @@ using System.Text;
 using Xamarin.Forms;
 
 using Codziennik.Views;
+using System.Threading.Tasks;
 
 namespace Codziennik
 {

@@ -9,7 +9,7 @@
         <Label Text="Opowiedz o swoim dniu:" 
                FontSize="Large" 
                TextColor="Black" 
-               Margin="20,20,0,0"/>
+               Margin="20,20,0,0"   />
         <Editor Text="Dzisiaj zdarzyło się..." 
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="Fill"
