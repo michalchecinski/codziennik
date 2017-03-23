@@ -10,7 +10,7 @@ namespace Codziennik.Models
 
         public List<string> Answers { get; set; }
 
-        public List<string> Questions { get; set; }
+        public List<string> Questions { get; private set; }
 
         [JsonIgnore]
         public string EntryDateString {
@@ -23,11 +23,19 @@ namespace Codziennik.Models
         public Entry()
         {
             SetEntryDateNow();
+            SetQuestions();
         }
 
         private void SetEntryDateNow()
         {
             EntryDate = DateTime.Now;
+        }
+
+        private void SetQuestions()
+        {
+            this.Questions = new List<string>();
+            this.Questions.Add("Za co jestem wdzięczny?");
+            this.Questions.Add("Wczorajsze zwycięstwo");
         }
 
         public override bool Equals(object obj)
@@ -38,7 +46,7 @@ namespace Codziennik.Models
             if (objAsEntry == null)
                 return false;
             else
-                return (this.EntryDate.Equals(objAsEntry.EntryDate) && this.EntryContent.Equals(objAsEntry.EntryContent));
+                return (this.EntryDate.Equals(objAsEntry.EntryDate) && this.Answers.Equals(objAsEntry.Answers));
         }
 
 

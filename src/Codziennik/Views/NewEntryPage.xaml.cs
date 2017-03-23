@@ -15,13 +15,7 @@ namespace Codziennik.Views
         public NewEntryPage()
         {
             InitializeComponent();
-            WhatHappenedEditor.Focused += (sender, e) => WhatHappenedEditor.Text = null;
-
-            WhatHappenedEditor.Unfocused += (sender, e) =>
-            {
-                if (WhatHappenedEditor.Text == null || WhatHappenedEditor.Text == "")
-                    WhatHappenedEditor.Text = "Dzisiaj zdarzyło się...";
-            };
+            
 
         }
 
@@ -29,7 +23,7 @@ namespace Codziennik.Views
         {
             if (WhatHappenedEditor.Text != null && WhatHappenedEditor.Text != "")
             {
-                Models.Entry newEntry = new Models.Entry(WhatHappenedEditor.Text);
+                Models.Entry newEntry = new Models.Entry();
                 await DataStorage.WriteOneEntry(newEntry);
                 await Navigation.PopAsync();
             }
