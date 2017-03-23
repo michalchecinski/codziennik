@@ -1,38 +1,46 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace Codziennik.Models
 {
     public class Entry
     {
-        public DateTime EntryDate { get; private set; }
+        public DateTime EntryDate { get; set; }
 
-        public string EntryContent { get; private set; }
+        public string EntryContent { get; set; }
 
-        public string EntryDateString { get; private set; }
-
-        public Entry(string entryContent, DateTime entryDate)
-        {
-            this.EntryDate = entryDate;
-            entryDateToString();
-            this.EntryContent = entryContent;
+        [JsonIgnore]
+        public string EntryDateString {
+            get
+            {
+                return EntryDate.ToString("dd.MM.yyyy HH:mm");
+            }
         }
 
         public Entry(string entryContent)
         {
-            SetEntryDate();
+            SetEntryDateNow();
             this.EntryContent = entryContent;
         }
 
-        private void SetEntryDate()
+        public Entry()
+        {
+        }
+
+        private void SetEntryDateNow()
         {
             EntryDate = DateTime.Now;
-            entryDateToString();
         }
 
-        private void entryDateToString()
+        public override bool Equals(object obj)
         {
-            EntryDateString = EntryDate.ToString("dd.MM.yyyy HH:mm");
+            if (obj == null)
+                return false;
+            Entry objAsEntry = obj as Entry;
+            if (objAsEntry == null)
+                return false;
+            else
+                return (this.EntryDate.Equals(objAsEntry.EntryDate) && this.EntryContent.Equals(objAsEntry.EntryContent));
         }
-
     }
 }

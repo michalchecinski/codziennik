@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Codziennik.Views.EntryListPage"
+             x:Name="EntryListContentPage"
              Padding="0,10,0,0"
              Title = "Lista wpisów">
   
