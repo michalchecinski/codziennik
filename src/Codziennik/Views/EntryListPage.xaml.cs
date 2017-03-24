@@ -29,7 +29,7 @@ namespace Codziennik.Views
             };
             toolbarItem.Clicked += async (sender, e) =>
             {
-                await Navigation.PushAsync(new EntryPage());
+                await Navigation.PushAsync(new NewEntryPage());
             };
             ToolbarItems.Add(toolbarItem);
 
@@ -50,7 +50,7 @@ namespace Codziennik.Views
 
             IsBusy = true;
 
-            List<Models.Entry> list = await DataStorage.ReadAllEntries();
+            List<Models.Entry> list = await EntryDataStorage.ReadAllEntries();
 
             entryListView.ItemsSource = list;
 

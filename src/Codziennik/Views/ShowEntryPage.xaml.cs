@@ -27,7 +27,7 @@ namespace Codziennik.Views
                 bool deleteConfirmed = await DisplayAlert("Chcesz usunąć wpis?", "Uwaga! Ta operacja jest nieodwracalna", "Usuń", "Anuluj");
                 if(deleteConfirmed == true)
                 {
-                    await DataStorage.DeleteEntry(entry);
+                    await EntryDataStorage.DeleteEntryAsync(entry);
                     await DisplayAlert("Usunięto wpis", entry.EntryDate.ToString(), "OK");
                     await Navigation.PopAsync();
                 }

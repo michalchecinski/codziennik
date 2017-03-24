@@ -9,12 +9,14 @@ using Xamarin.Forms;
 
 namespace Codziennik.Views
 {
-    public class EntryPage : ContentPage
+    public class NewEntryPage : ContentPage
     {
-        public EntryPage()
+        List<Editor> answersEditors = new List<Editor>();
+        Models.Entry entry = new Models.Entry();
+
+        public NewEntryPage()
         {
             Title = "Dodaj nowy wpis";
-            Models.Entry entry = new Models.Entry();
 
             var layout = new StackLayout
             {
@@ -23,13 +25,15 @@ namespace Codziennik.Views
                 },
                 Spacing = 10,
                 Margin = new Thickness(20, 5)
-               
             };
+
+            entry.SetQuestions();
 
             foreach (string question in entry.Questions)
             {
                 var questionLabel = new Label { Text = question, HorizontalTextAlignment = TextAlignment.Center };
                 var answerEditor = new Editor { HorizontalOptions = LayoutOptions.Fill, HeightRequest = 150 };
+                answersEditors.Add(answerEditor);
                 layout.Children.Add(questionLabel);
                 layout.Children.Add(answerEditor);
             }
@@ -37,7 +41,10 @@ namespace Codziennik.Views
             saveButton.Clicked += SaveButtonClicked;
             layout.Children.Add(saveButton);
 
-            var scrollview = new ScrollView().Content = layout;
+            var scrollview = new ScrollView()
+            {
+                Content = layout
+            };
 
             this.Content = scrollview;
             
@@ -45,8 +52,14 @@ namespace Codziennik.Views
 
         async void SaveButtonClicked(object sender, EventArgs e)
         {
-                //await DataStorage.WriteOneEntry(null);
-                await Navigation.PopAsync();
+            entry.Answers = new List<string>();
+            foreach(Editor editor in answersEditors)
+            {
+                entry.Answers.Add(editor.Text);
+            }
+            await EntryDataStorage.WriteOneEntryAsync(entry);
+            await Navigation.PopAsync();
         }
+
     }
 }
