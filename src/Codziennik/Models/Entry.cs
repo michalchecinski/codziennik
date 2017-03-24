@@ -1,35 +1,43 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace Codziennik.Models
 {
     public class Entry
     {
-        public DateTime EntryDate { get; set; }
+        public DateTime Date { get; set; }
 
-        public string EntryContent { get; set; }
+        public List<string> Answers { get; set; }
+
+        public List<string> Questions { get; set; }
 
         [JsonIgnore]
         public string EntryDateString {
             get
             {
-                return EntryDate.ToString("dd.MM.yyyy HH:mm");
+                return Date.ToString("dd.MM.yyyy HH:mm");
             }
-        }
-
-        public Entry(string entryContent)
-        {
-            SetEntryDateNow();
-            this.EntryContent = entryContent;
         }
 
         public Entry()
         {
+            SetEntryDateNow();
         }
 
         private void SetEntryDateNow()
         {
-            EntryDate = DateTime.Now;
+            Date = DateTime.Now;
+        }
+
+        public void SetQuestions()
+        {
+            if (Questions == null)
+            {
+                this.Questions = new List<string>();
+                this.Questions.Add("Za co jestem wdzięczny?");
+                this.Questions.Add("Wczorajsze zwycięstwo");
+            }
         }
 
         public override bool Equals(object obj)
@@ -40,7 +48,33 @@ namespace Codziennik.Models
             if (objAsEntry == null)
                 return false;
             else
-                return (this.EntryDate.Equals(objAsEntry.EntryDate) && this.EntryContent.Equals(objAsEntry.EntryContent));
+                return (this.Date.Equals(objAsEntry.Date) && EqualsTwoLists(objAsEntry.Answers, this.Answers));
         }
+
+        private bool EqualsTwoLists(List<string> first, List<string> second)
+        {
+            if (first == null || second == null)
+                return false;
+            if (first.Count != second.Count)
+                return false;
+
+            var firstArray = first.ToArray();
+            var secondArray = second.ToArray();
+
+            for (int i = 0; i < first.Count; i++)
+            {
+                if (firstArray[i] != secondArray[i])
+                    return false;
+            }
+
+            return true;
+        }
+
+
+        public override int GetHashCode()
+        {
+            return 17 * (Date.GetHashCode() + Answers.GetHashCode());
+        }
+
     }
 }

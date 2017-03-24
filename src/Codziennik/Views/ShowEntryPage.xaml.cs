@@ -16,7 +16,7 @@ namespace Codziennik.Views
             InitializeComponent();
 
             EntryDateLabel.Text = entry.EntryDate.ToString();
-            EntryContentLabel.Text = entry.EntryContent;
+            //EntryContentLabel.Text = entry.EntryContent;
 
             var toolbarItem = new ToolbarItem
             {
