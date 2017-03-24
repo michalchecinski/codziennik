@@ -13,6 +13,7 @@ namespace Codziennik.Views
     {
         public EntryPage()
         {
+            Title = "Dodaj nowy wpis";
             Models.Entry entry = new Models.Entry();
 
             var layout = new StackLayout
