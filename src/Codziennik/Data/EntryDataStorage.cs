@@ -1,5 +1,6 @@
 ﻿using Codziennik.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using PCLStorage;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Codziennik.Data
 {
-    class DataStorage
+    class EntryDataStorage
     {
         public async static Task WriteAllEntries(List<Entry> entriesList)
         {
@@ -36,7 +37,7 @@ namespace Codziennik.Data
                 return new List<Entry>();
         }
 
-        public async static Task WriteOneEntry(Entry newEntry)
+        public async static Task WriteOneEntryAsync(Entry newEntry)
         {
             List<Entry> entriesList = await ReadAllEntries();
 
@@ -46,12 +47,17 @@ namespace Codziennik.Data
 
         }
 
-        public async static Task DeleteEntry(Entry entryToDelete)
+        public async static Task DeleteEntryAsync(Entry entryToDelete)
         {
             List<Entry> entriesList = await ReadAllEntries();
 
             if(entriesList.Remove(entryToDelete))
                 await WriteAllEntries(entriesList);
+        }
+
+        public async static Task WriteEditedEntryAsync(Entry entry)
+        {
+            throw new NotImplementedException();
         }
     }
 }
