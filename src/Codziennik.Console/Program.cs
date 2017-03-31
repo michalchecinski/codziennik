@@ -11,14 +11,7 @@ namespace Codziennik.Console
     {
         static void Main(string[] args)
         {
-            Models.Entry entry = new Models.Entry();
-            string serialized = JsonConvert.SerializeObject(entry);
-
-            System.Console.WriteLine("Data: " + entry.EntryDateString);
-
-            System.Console.WriteLine(serialized);
-
-            System.Console.ReadKey();
+            
             
         }
     }

@@ -57,6 +57,7 @@ namespace Codziennik.Views
             {
                 entry.Answers.Add(editor.Text);
             }
+            entry.SetEntryDateNow();
             await EntryDataStorage.WriteOneEntryAsync(entry);
             await Navigation.PopAsync();
         }

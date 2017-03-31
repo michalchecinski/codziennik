@@ -12,7 +12,7 @@ namespace Codziennik.Views
     public class EditEntryPage : ContentPage
     {
         List<Editor> answersEditors = new List<Editor>();
-        Models.Entry entry = null;
+        public Models.Entry entry { get; private set; } = null;
 
         public EditEntryPage(Models.Entry passedEntry)
         {

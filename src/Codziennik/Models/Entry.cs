@@ -22,10 +22,10 @@ namespace Codziennik.Models
 
         public Entry()
         {
-            SetEntryDateNow();
+            //SetEntryDateNow();
         }
 
-        private void SetEntryDateNow()
+        public void SetEntryDateNow()
         {
             Date = DateTime.Now;
         }
@@ -48,7 +48,7 @@ namespace Codziennik.Models
             if (objAsEntry == null)
                 return false;
             else
-                return (this.Date.Equals(objAsEntry.Date) && EqualsTwoLists(objAsEntry.Answers, this.Answers));
+                return (this.Date.Equals(objAsEntry.Date));
         }
 
         private bool EqualsTwoLists(List<string> first, List<string> second)

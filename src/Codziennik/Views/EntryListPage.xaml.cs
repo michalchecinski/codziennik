@@ -63,9 +63,7 @@ namespace Codziennik.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-
             await LoadData();
-            
         }
 
         }

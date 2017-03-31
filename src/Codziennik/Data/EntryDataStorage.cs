@@ -13,6 +13,8 @@ namespace Codziennik.Data
 {
     class EntryDataStorage
     {
+        private static List<Entry> ReadedEntries = null;
+
         public async static Task WriteAllEntries(List<Entry> entriesList)
         {
 
@@ -57,7 +59,14 @@ namespace Codziennik.Data
 
         public async static Task WriteEditedEntryAsync(Entry entry)
         {
-            throw new NotImplementedException();
+            await DeleteEntryAsync(entry);
+            await WriteOneEntryAsync(entry);
+            ReadedEntries = await ReadAllEntries();
+        }
+
+        public static Entry GetOneEntry(Entry entryToSearch)
+        {
+            return ReadedEntries.Find(x => x.Equals(entryToSearch));
         }
     }
 }

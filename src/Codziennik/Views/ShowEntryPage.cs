@@ -4,14 +4,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Codziennik.Views
 {
     public class ShowEntryPage : ContentPage
     {
+
+        bool edited = false;
+        Models.Entry passedEntry = null;
         public ShowEntryPage(Models.Entry entry)
+        {
+            passedEntry = entry;
+            var toolbarItemDelete = new ToolbarItem
+            {
+                Text = "-"
+            };
+            toolbarItemDelete.Clicked += async (sender, e) =>
+            {
+                bool deleteConfirmed = await DisplayAlert("Chcesz usunąć wpis?", "Uwaga! Ta operacja jest nieodwracalna", "Usuń", "Anuluj");
+                if (deleteConfirmed == true)
+                {
+                    await EntryDataStorage.DeleteEntryAsync(entry);
+                    await DisplayAlert("Usunięto wpis", entry.Date.ToString(), "OK");
+                    await Navigation.PopAsync();
+                }
+            };
+            ToolbarItems.Add(toolbarItemDelete);
+
+            var toolbarItemEdit = new ToolbarItem
+            {
+                Text = "Edytuj"
+            };
+            toolbarItemEdit.Clicked += async (sender, e) =>
+            {
+                edited = true;
+                await Navigation.PushAsync(new EditEntryPage(entry));
+            };
+            ToolbarItems.Add(toolbarItemEdit);
+
+        }
+
+        private void MakeLayoutAndLoadData(Models.Entry entry)
         {
             var layout = new StackLayout()
             {
@@ -35,34 +70,25 @@ namespace Codziennik.Views
                 Content = layout
             };
 
+            if (this.Content != null)
+                this.Content = null;
+
             this.Content = scrollview;
+        }
 
-
-            var toolbarItemDelete = new ToolbarItem
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if(edited)
             {
-                Text = "-"
-            };
-            toolbarItemDelete.Clicked += async (sender, e) =>
+               
+                var ReadedEntry = EntryDataStorage.GetOneEntry(passedEntry);
+                MakeLayoutAndLoadData(ReadedEntry);
+            }
+            else
             {
-                bool deleteConfirmed = await DisplayAlert("Chcesz usunąć wpis?", "Uwaga! Ta operacja jest nieodwracalna", "Usuń", "Anuluj");
-                if (deleteConfirmed == true)
-                {
-                    await EntryDataStorage.DeleteEntryAsync(entry);
-                    await DisplayAlert("Usunięto wpis", entry.Date.ToString(), "OK");
-                    await Navigation.PopAsync();
-                }
-            };
-            ToolbarItems.Add(toolbarItemDelete);
-
-            var toolbarItemEdit = new ToolbarItem
-            {
-                Text = "Edytuj"
-            };
-            toolbarItemEdit.Clicked += async (sender, e) =>
-            {
-                    await Navigation.PushAsync(new EditEntryPage(entry));
-            };
-            ToolbarItems.Add(toolbarItemEdit);
+                MakeLayoutAndLoadData(passedEntry);
+            }
 
         }
     }
