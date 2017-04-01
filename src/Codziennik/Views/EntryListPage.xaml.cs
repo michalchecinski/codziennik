@@ -33,6 +33,17 @@ namespace Codziennik.Views
             };
             ToolbarItems.Add(toolbarItem);
 
+            var settingsToolbarItem = new ToolbarItem
+            {
+                Text = "Ustawienia"
+            };
+            settingsToolbarItem.Clicked += async (sender, e) =>
+            {
+                await Navigation.PushAsync(new SettingsPage());
+            };
+            ToolbarItems.Add(settingsToolbarItem);
+
+
             entryListView.ItemTapped += async (sender, e) =>
             {
                 var item = e.Item as Models.Entry;

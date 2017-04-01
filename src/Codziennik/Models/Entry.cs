@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using Codziennik.Data;
 
 namespace Codziennik.Models
 {
@@ -22,7 +23,6 @@ namespace Codziennik.Models
 
         public Entry()
         {
-            //SetEntryDateNow();
         }
 
         public void SetEntryDateNow()
@@ -32,11 +32,15 @@ namespace Codziennik.Models
 
         public void SetQuestions()
         {
-            if (Questions == null)
+            //Questions = await SettingsDataStorage.ReadAllQuestions();
+
+            if (Questions == null || Questions.Count == 0)
             {
-                this.Questions = new List<string>();
-                this.Questions.Add("Za co jestem wdzięczny?");
-                this.Questions.Add("Wczorajsze zwycięstwo");
+                this.Questions = new List<string>
+                {
+                    "Za co jestem wdzięczny?",
+                    "Wczorajsze zwycięstwo"
+                };
             }
         }
 
