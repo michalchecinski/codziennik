@@ -9,15 +9,23 @@
   
   <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand">
-            <ListView x:Name="entryListView" VerticalOptions="FillAndExpand" SeparatorVisibility="Default" Margin="10,0,10,0"   >
+            
+            <ListView x:Name="entryListView" 
+                      VerticalOptions="FillAndExpand" 
+                      SeparatorVisibility="Default" 
+                      SeparatorColor="Black"  
+                      Margin="10,0,10,0" >
+
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>                        
-                          <StackLayout Orientation="Horizontal">
-                            <StackLayout Orientation="Vertical">
-                                <Label Text="{Binding EntryDateString}" FontSize="Medium" />
-                            </StackLayout>
-                        </StackLayout>
+                          
+                                <Label Text="{Binding EntryDateString}"
+                                       FontSize="Medium" 
+                                       TextColor="Black" 
+                                       VerticalTextAlignment="Center" 
+                                       HorizontalTextAlignment="Center"/>
+                            
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

@@ -27,7 +27,7 @@ namespace Codziennik.Views
                 if (deleteConfirmed == true)
                 {
                     await EntryDataStorage.DeleteEntryAsync(entry);
-                    await DisplayAlert("Usunięto wpis", entry.Date.ToString(), "OK");
+                    await DisplayAlert("Usunięto wpis", entry.EntryDateString, "OK");
                     await Navigation.PopAsync();
                 }
             };

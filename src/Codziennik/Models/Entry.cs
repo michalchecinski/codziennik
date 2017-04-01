@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Codziennik.Data;
+using System.Threading.Tasks;
 
 namespace Codziennik.Models
 {
@@ -30,9 +31,9 @@ namespace Codziennik.Models
             Date = DateTime.Now;
         }
 
-        public void SetQuestions()
+        public async Task SetQuestions()
         {
-            //Questions = await SettingsDataStorage.ReadAllQuestions();
+            Questions = await SettingsDataStorage.ReadAllQuestions();
 
             if (Questions == null || Questions.Count == 0)
             {

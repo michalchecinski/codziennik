@@ -23,15 +23,6 @@ namespace Codziennik.Views
                 entryListView.IsRefreshing = false;
             });
 
-            var toolbarItem = new ToolbarItem
-            {
-                Text = "+"
-            };
-            toolbarItem.Clicked += async (sender, e) =>
-            {
-                await Navigation.PushAsync(new NewEntryPage());
-            };
-            ToolbarItems.Add(toolbarItem);
 
             var settingsToolbarItem = new ToolbarItem
             {
@@ -43,6 +34,16 @@ namespace Codziennik.Views
             };
             ToolbarItems.Add(settingsToolbarItem);
 
+            var toolbarItem = new ToolbarItem
+            {
+                Text = "+"
+            };
+            toolbarItem.Clicked += async (sender, e) =>
+            {
+                await Navigation.PushAsync(new NewEntryPage());
+            };
+            ToolbarItems.Add(toolbarItem);
+            
 
             entryListView.ItemTapped += async (sender, e) =>
             {

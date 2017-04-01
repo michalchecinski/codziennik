@@ -33,6 +33,7 @@ namespace Codziennik.Data
             {
                 IFile file = await folder.GetFileAsync("entries");
                 List<Entry> EntriesList = JsonConvert.DeserializeObject<List<Entry>>(await file.ReadAllTextAsync());
+                ReadedEntries = EntriesList;
                 return EntriesList;
             }
             else

@@ -13,6 +13,8 @@ namespace Codziennik.Views
     {
         List<Editor> answersEditors = new List<Editor>();
         public Models.Entry entry { get; private set; } = null;
+        bool saved = false;
+
 
         public EditEntryPage(Models.Entry passedEntry)
         {
@@ -53,6 +55,19 @@ namespace Codziennik.Views
             };
 
             this.Content = scrollview;
+
+
+
+            var accepptToolbarItem = new ToolbarItem
+            {
+                Text = "Zapisz"
+            };
+            accepptToolbarItem.Clicked += (sender, e) =>
+            {
+                SaveButtonClicked(sender, e);
+            };
+            ToolbarItems.Add(accepptToolbarItem);
+
         }
 
         async void SaveButtonClicked(object sender, EventArgs e)

@@ -18,36 +18,15 @@ namespace Codziennik.Views
         {
             Title = "Dodaj nowy wpis";
 
-            var layout = new StackLayout
+            var accepptToolbarItem = new ToolbarItem
             {
-                Children = {
-                    new Label { Text = "Opowiedz o swoim dniu", FontSize = 20 }
-                },
-                Spacing = 10,
-                Margin = new Thickness(20, 5)
+                Text = "Zapisz"
             };
-
-            entry.SetQuestions();
-
-            foreach (string question in entry.Questions)
+            accepptToolbarItem.Clicked += (sender, e) =>
             {
-                var questionLabel = new Label { Text = question, HorizontalTextAlignment = TextAlignment.Center };
-                var answerEditor = new Editor { HorizontalOptions = LayoutOptions.Fill, HeightRequest = 150 };
-                answersEditors.Add(answerEditor);
-                layout.Children.Add(questionLabel);
-                layout.Children.Add(answerEditor);
-            }
-            var saveButton = new Button() { Text = "Zapisz", HorizontalOptions = LayoutOptions.Center};
-            saveButton.Clicked += SaveButtonClicked;
-            layout.Children.Add(saveButton);
-
-            var scrollview = new ScrollView()
-            {
-                Content = layout
+                SaveButtonClicked(sender, e);
             };
-
-            this.Content = scrollview;
-            
+            ToolbarItems.Add(accepptToolbarItem);
         }
 
         async void SaveButtonClicked(object sender, EventArgs e)
@@ -61,6 +40,45 @@ namespace Codziennik.Views
             await EntryDataStorage.WriteOneEntryAsync(entry);
             await Navigation.PopAsync();
         }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+
+            var layout = new StackLayout
+            {
+                Children = {
+                    new Label { Text = "Opowiedz o swoim dniu", FontSize = 20 }
+                },
+                Spacing = 10,
+                Margin = new Thickness(20, 5)
+            };
+
+            await entry.SetQuestions();
+
+            foreach (string question in entry.Questions)
+            {
+                var questionLabel = new Label { Text = question, HorizontalTextAlignment = TextAlignment.Center };
+                var answerEditor = new Editor { HorizontalOptions = LayoutOptions.Fill, HeightRequest = 150 };
+                answersEditors.Add(answerEditor);
+                layout.Children.Add(questionLabel);
+                layout.Children.Add(answerEditor);
+            }
+            var saveButton = new Button() { Text = "Zapisz", HorizontalOptions = LayoutOptions.Center };
+            saveButton.Clicked += SaveButtonClicked;
+            layout.Children.Add(saveButton);
+
+            var scrollview = new ScrollView()
+            {
+                Content = layout
+            };
+
+            this.Content = scrollview;
+
+        }
+
+        
 
     }
 }
