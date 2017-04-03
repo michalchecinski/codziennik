@@ -41,14 +41,43 @@ namespace Codziennik.Views
         {
             base.OnDisappearing();
 
-            string questionsString = QuestionsEditor.Text;
+            List<string> Questions = null;
 
-            List<string> Questions = new List<string>(
-                           questionsString.Split(new string[] { "\n" },
-                           StringSplitOptions.RemoveEmptyEntries));
+            if (QuestionsEditor.Text == String.Empty || QuestionsEditor.Text == null)
+            {
+
+                await DisplayAlert("Brak pytań!", "Pytania zostały ustawione na domyślne", "OK");
+
+                Questions = new List<string>
+                {
+                    "Za co jestem wdzięczny?",
+                    "Wczorajsze zwycięstwo"
+                };
+            }
+            else
+            {
+                string questionsString = QuestionsEditor.Text;
+
+                Questions = new List<string>(
+                               questionsString.Split(new string[] { "\n" },
+                               StringSplitOptions.RemoveEmptyEntries));
+            }
+                
+            
 
             await SettingsDataStorage.WriteAllQuestions(Questions);
 
+        }
+
+        private void RestoreDefaultQuestions(object sender, EventArgs e)
+        {
+            List<string> Questions = new List<string>
+                {
+                    "Za co jestem wdzięczny?",
+                    "Wczorajsze zwycięstwo"
+                };
+
+            QuestionsEditor.Text = String.Join("\n", Questions);
         }
     }
 }
