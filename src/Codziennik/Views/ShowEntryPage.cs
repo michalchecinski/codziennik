@@ -19,7 +19,7 @@ namespace Codziennik.Views
             passedEntry = entry;
             var toolbarItemDelete = new ToolbarItem
             {
-                Text = "-"
+                Text = "Usuń"
             };
             toolbarItemDelete.Clicked += async (sender, e) =>
             {
@@ -43,6 +43,8 @@ namespace Codziennik.Views
                 await Navigation.PushAsync(new EditEntryPage(entry));
             };
             ToolbarItems.Add(toolbarItemEdit);
+
+            MakeLayoutAndLoadData(entry);
 
         }
 
@@ -81,15 +83,9 @@ namespace Codziennik.Views
             base.OnAppearing();
             if(edited)
             {
-               
                 var ReadedEntry = EntryDataStorage.GetOneEntry(passedEntry);
                 MakeLayoutAndLoadData(ReadedEntry);
             }
-            else
-            {
-                MakeLayoutAndLoadData(passedEntry);
-            }
-
         }
     }
 }
