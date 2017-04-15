@@ -16,7 +16,6 @@ namespace Codziennik.Views
         public SettingsPage()
         {
             InitializeComponent();
-
         }
 
         protected override async void OnAppearing()
