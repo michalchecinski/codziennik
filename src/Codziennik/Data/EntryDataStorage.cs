@@ -15,7 +15,7 @@ namespace Codziennik.Data
     {
         private static List<Entry> ReadedEntries = null;
 
-        public async static Task WriteAllEntries(List<Entry> entriesList)
+        public async static Task WriteAllEntries(List<Entry> entriesList) 
         {
 
             IFolder folder = await FileSystem.Current.LocalStorage.CreateFolderAsync("CodziennikFiles", CreationCollisionOption.OpenIfExists);

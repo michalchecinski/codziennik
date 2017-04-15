@@ -19,7 +19,8 @@ namespace Codziennik.Views
             passedEntry = entry;
             var toolbarItemDelete = new ToolbarItem
             {
-                Text = "Usuń"
+                Text = "Usuń",
+                Icon="garbage.png"
             };
             toolbarItemDelete.Clicked += async (sender, e) =>
             {
@@ -35,7 +36,8 @@ namespace Codziennik.Views
 
             var toolbarItemEdit = new ToolbarItem
             {
-                Text = "Edytuj"
+                Text = "Edytuj",
+                Icon="edit.png"
             };
             toolbarItemEdit.Clicked += async (sender, e) =>
             {

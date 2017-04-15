@@ -26,7 +26,8 @@ namespace Codziennik.Views
 
             var settingsToolbarItem = new ToolbarItem
             {
-                Text = "Ustawienia"
+                Text = "Ustawienia",
+                Icon="settings.png"
             };
             settingsToolbarItem.Clicked += async (sender, e) =>
             {
@@ -36,7 +37,8 @@ namespace Codziennik.Views
 
             var toolbarItem = new ToolbarItem
             {
-                Text = "+"
+                Text = "Dodaj wpis",
+                Icon="add.png"
             };
             toolbarItem.Clicked += async (sender, e) =>
             {
@@ -67,7 +69,7 @@ namespace Codziennik.Views
             entryListView.ItemsSource = list;
 
             if (list.Count == 0)
-                await DisplayAlert("Brak wpisów", "Dodaj swój pierwszy wpis!", "OK");
+                await DisplayAlert("Brak wpisów", "Dodaj swój pierwszy wpis klikając +", "OK");
 
             IsBusy = false;
         }

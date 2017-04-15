@@ -14,12 +14,13 @@
                    HorizontalOptions="Center"/>
 
             <Editor x:Name="QuestionsEditor" 
-                HorizontalOptions="Fill" 
-                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand" 
+                VerticalOptions="Fill"
+                    HeightRequest="200"
                     FontSize="15"/>
 
             <Button Text="Przywróć domyśle pytania" 
-                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand" 
                     Margin="10,0,10,0" 
                     Clicked="RestoreDefaultQuestions" />
 

@@ -72,6 +72,7 @@ namespace Codziennik.Views
 
         async void SaveButtonClicked(object sender, EventArgs e)
         {
+            saved = true;
             entry.Answers = new List<string>();
             foreach (Editor editor in answersEditors)
             {
@@ -80,5 +81,6 @@ namespace Codziennik.Views
             await EntryDataStorage.WriteEditedEntryAsync(entry);
             await Navigation.PopAsync();
         }
+
     }
 }
