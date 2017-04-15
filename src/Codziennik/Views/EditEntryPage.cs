@@ -94,7 +94,16 @@ namespace Codziennik.Views
             {
                 entry.Answers.Add(editor.Text);
             }
-            await EntryDataStorage.WriteEditedEntryAsync(entry);
+
+            try
+            {
+                await EntryDataStorage.WriteEditedEntryAsync(entry);
+            }
+            catch(Exception ex)
+            {
+                await DisplayAlert("Błąd", "Nie udało się zapisać wpisu. Skontaktuj się z twórcą aplikacji", "OK");
+            }
+
             await Navigation.PopAsync();
         }
 

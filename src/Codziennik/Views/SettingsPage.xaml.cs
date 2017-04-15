@@ -23,7 +23,17 @@ namespace Codziennik.Views
         {
             base.OnAppearing();
 
-            List<string> Questions = await SettingsDataStorage.ReadAllQuestions();
+            List<string> Questions = null;
+
+            try
+            {
+                Questions = await SettingsDataStorage.ReadAllQuestions();
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Błąd!", "Nie udało się odczytać zapisanych pytań. Zostały przywrócone domyślne pytania.", "OK");
+            }
+            
 
             if (Questions == null || Questions.Count == 0)
             {
@@ -62,10 +72,17 @@ namespace Codziennik.Views
                                questionsString.Split(new string[] { "\n" },
                                StringSplitOptions.RemoveEmptyEntries));
             }
-                
-            
 
-            await SettingsDataStorage.WriteAllQuestions(Questions);
+
+            try
+            {
+                await SettingsDataStorage.WriteAllQuestions(Questions);
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Błąd!", "Nie udało się zapisać pytań. Skontaktuj się z twórcą aplikacji", "OK");
+            }
+            
 
         }
 

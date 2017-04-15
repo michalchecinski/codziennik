@@ -43,7 +43,15 @@ namespace Codziennik.Views
                 entry.Answers.Add(editor.Text);
             }
             entry.SetEntryDateNow();
-            await EntryDataStorage.WriteOneEntryAsync(entry);
+            try
+            {
+                await EntryDataStorage.WriteOneEntryAsync(entry);
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Błąd", "Nie udało się zapisać wpisu. Skontaktuj się z twórcą aplikacji", "OK");
+            }
+            
             await Navigation.PopAsync();
         }
 
