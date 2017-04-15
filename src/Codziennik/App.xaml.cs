@@ -24,19 +24,26 @@ namespace Codziennik
 
         }
 
+        const string storedDataName = "storedData";
+
+        public string StoredData { get; set; } = String.Empty;
+
         protected override void OnStart()
         {
-            // Handle when your app starts
+                StoredData = null;
         }
 
         protected override void OnSleep()
         {
-            // Handle when your app sleeps
+            Properties[storedDataName] = StoredData;
         }
 
         protected override void OnResume()
         {
-            // Handle when your app resumes
+            if (Properties.ContainsKey(storedDataName))
+                StoredData = (string)Properties[storedDataName];
+            else
+                StoredData = null;
         }
     }
 }
