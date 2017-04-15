@@ -64,7 +64,17 @@ namespace Codziennik.Views
 
             IsBusy = true;
 
-            List<Models.Entry> list = await EntryDataStorage.ReadAllEntries();
+            List<Models.Entry> list = null;
+
+            try
+            {
+                list = await EntryDataStorage.ReadAllEntries();
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Błąd", "Nie udało się odczytać wpisów. Skontaktuj się z twórcą aplikacji", "OK");
+            }
+            
 
             entryListView.ItemsSource = list;
 

@@ -27,9 +27,20 @@ namespace Codziennik.Views
                 bool deleteConfirmed = await DisplayAlert("Chcesz usunąć wpis?", "Uwaga! Ta operacja jest nieodwracalna", "Usuń", "Anuluj");
                 if (deleteConfirmed == true)
                 {
-                    await EntryDataStorage.DeleteEntryAsync(entry);
-                    await DisplayAlert("Usunięto wpis", entry.EntryDateString, "OK");
-                    await Navigation.PopAsync();
+                    try
+                    {
+                        await EntryDataStorage.DeleteEntryAsync(entry);
+                        await DisplayAlert("Usunięto wpis", entry.EntryDateString, "OK");
+                    }
+                    catch (Exception)
+                    {
+                        await DisplayAlert("Błąd", "Nie udało się usunąć wpisu. Skontaktuj się z twórcą aplikacji", "OK");
+                    }
+                    finally
+                    {
+                        await Navigation.PopAsync();
+                    }
+                        
                 }
             };
             ToolbarItems.Add(toolbarItemDelete);
@@ -85,8 +96,15 @@ namespace Codziennik.Views
             base.OnAppearing();
             if(edited)
             {
-                var ReadedEntry = EntryDataStorage.GetOneEntry(passedEntry);
-                MakeLayoutAndLoadData(ReadedEntry);
+                try
+                {
+                    var ReadedEntry = EntryDataStorage.GetOneEntry(passedEntry);
+                    MakeLayoutAndLoadData(ReadedEntry);
+                }
+                catch (Exception)
+                {
+                    DisplayAlert("Błąd", "Nie udało się odczytać wpisu. Skontaktuj się z twórcą aplikacji", "OK");
+                }
             }
         }
     }
