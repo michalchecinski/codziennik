@@ -107,5 +107,11 @@ namespace Codziennik.Views
                 }
             }
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
+        }
+
     }
 }

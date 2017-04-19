@@ -26,7 +26,7 @@ namespace Codziennik
 
         const string storedDataName = "storedData";
 
-        public string StoredData { get; set; } = String.Empty;
+        public string StoredData { get; set; } = null;
 
         protected override void OnStart()
         {

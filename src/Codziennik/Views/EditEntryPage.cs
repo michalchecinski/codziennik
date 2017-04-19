@@ -13,8 +13,7 @@ namespace Codziennik.Views
     public class EditEntryPage : ContentPage
     {
         List<Editor> answersEditors = new List<Editor>();
-        public Models.Entry entry { get; private set; } = null;
-        bool saved = false;
+        public Models.Entry Entry { get; private set; } = null;
 
         App app = App.Current as App;
 
@@ -24,9 +23,8 @@ namespace Codziennik.Views
 
             if(app.StoredData == null)
             {
-                entry = passedEntry;
+                Entry = passedEntry;
             }
-
         }
 
         protected override void OnAppearing()
@@ -35,10 +33,10 @@ namespace Codziennik.Views
 
             if (app.StoredData != null)
             {
-                entry = JsonConvert.DeserializeObject<Models.Entry>(app.StoredData);
+                Entry = JsonConvert.DeserializeObject<Models.Entry>(app.StoredData);
                 app.StoredData = null;
             }
-            
+
 
             var layout = new StackLayout
             {
@@ -51,7 +49,7 @@ namespace Codziennik.Views
 
 
 
-            var questionsAndAnswers = entry.Questions.Zip(entry.Answers, (q, a) => new { Question = q, Answer = a });
+            var questionsAndAnswers = Entry.Questions.Zip(Entry.Answers, (q, a) => new { Question = q, Answer = a });
             foreach (var qa in questionsAndAnswers)
             {
                 var questionLabel = new Label { Text = qa.Question, HorizontalTextAlignment = TextAlignment.Center };
@@ -63,9 +61,21 @@ namespace Codziennik.Views
             }
 
 
-            var saveButton = new Button() { Text = "Zapisz", HorizontalOptions = LayoutOptions.Center };
+            var saveButton = new Button() { Text = "Zapisz" };
             saveButton.Clicked += SaveButtonClicked;
-            layout.Children.Add(saveButton);
+            var cancelButton = new Button() { Text = "Anuluj" };
+            cancelButton.Clicked += CancelButtonClickedAsync;
+            var horizontalLayout = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                HorizontalOptions = LayoutOptions.Center
+            };
+
+
+            horizontalLayout.Children.Add(saveButton);
+            horizontalLayout.Children.Add(cancelButton);
+
+            layout.Children.Add(horizontalLayout);
 
             var scrollview = new ScrollView()
             {
@@ -73,41 +83,56 @@ namespace Codziennik.Views
             };
 
             this.Content = scrollview;
+
+        }
+
+        private async void CancelButtonClickedAsync(object sender, EventArgs e)
+        {
+            if (await DisplayAlert("Chcesz wyjść bez zapisywania?", "Jesteś pewnien, że chesz wyjść bez zapisywania?", "Wyjdź", "Zostań"))
+                await Navigation.PopModalAsync();
+
         }
 
         async void SaveButtonClicked(object sender, EventArgs e)
         {
             app.StoredData = null;
-            saved = true;
-            entry.Answers = new List<string>();
+            Entry.Answers = new List<string>();
             foreach (Editor editor in answersEditors)
             {
-                entry.Answers.Add(editor.Text);
+                Entry.Answers.Add(editor.Text);
             }
 
             try
             {
-                await EntryDataStorage.WriteEditedEntryAsync(entry);
+                await EntryDataStorage.WriteEditedEntryAsync(Entry);
             }
             catch(Exception ex)
             {
                 await DisplayAlert("Błąd", "Nie udało się zapisać wpisu. Skontaktuj się z twórcą aplikacji", "OK");
             }
 
-            await Navigation.PopAsync();
+            await Navigation.PopModalAsync();
         }
 
         void SaveProperties(object sender, EventArgs e)
         {
-            entry.Answers = new List<string>();
+            Entry.Answers = new List<string>();
             foreach (Editor editor in answersEditors)
             {
-                entry.Answers.Add(editor.Text);
+                Entry.Answers.Add(editor.Text);
             }
 
-            entry.SetEntryDateNow();
+            Entry.SetEntryDateNow();
 
-            app.StoredData = JsonConvert.SerializeObject(entry);
+            app.StoredData = JsonConvert.SerializeObject(Entry);
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            if (DisplayAlert("Chcesz wyjść bez zapisywania?", "Jesteś pewnien, że chesz wyjść bez zapisywania?", "Wyjdź", "Zostań").Result == true)
+                return true;
+            else
+                return false;
         }
 
     }

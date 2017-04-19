@@ -20,7 +20,7 @@ namespace Codziennik.Views
 
         public NewEntryPage()
         {
-
+            bool propertiesTaken = false;
         }
 
         async void SaveButtonClicked(object sender, EventArgs e)
@@ -41,7 +41,7 @@ namespace Codziennik.Views
                 await DisplayAlert("Błąd", "Nie udało się zapisać wpisu. Skontaktuj się z twórcą aplikacji", "OK");
             }
             
-            await Navigation.PopAsync();
+            await Navigation.PopModalAsync();
         }
 
         void SaveProperties(object sender, EventArgs e)
@@ -76,7 +76,7 @@ namespace Codziennik.Views
             var layout = new StackLayout
             {
                 Children = {
-                    new Label { Text = "Opowiedz o swoim dniu", FontSize = 20 }
+                    new Label { Text = "Opowiedz o swoim dniu:", FontSize = 20 }
                 },
                 Spacing = 10,
                 Margin = new Thickness(20, 5)
@@ -93,14 +93,26 @@ namespace Codziennik.Views
                 {
                     answerEditor.Text = entry.Answers[i];
                     i++;
-                }                   
+                }
                 answersEditors.Add(answerEditor);
                 layout.Children.Add(questionLabel);
                 layout.Children.Add(answerEditor);
             }
-            var saveButton = new Button() { Text = "Zapisz", HorizontalOptions = LayoutOptions.Center };
+            var saveButton = new Button() { Text = "Zapisz" };
             saveButton.Clicked += SaveButtonClicked;
-            layout.Children.Add(saveButton);
+            var cancelButton = new Button() { Text = "Anuluj" };
+            cancelButton.Clicked += CancelButtonClickedAsync;
+            var horizontalLayout = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                HorizontalOptions = LayoutOptions.Center
+            };
+
+            
+            horizontalLayout.Children.Add(saveButton);
+            horizontalLayout.Children.Add(cancelButton);
+
+            layout.Children.Add(horizontalLayout);
 
             var scrollview = new ScrollView()
             {
@@ -111,7 +123,21 @@ namespace Codziennik.Views
 
         }
 
-        
+        private async void CancelButtonClickedAsync(object sender, EventArgs e)
+        {
+            if (await DisplayAlert("Chcesz wyjść bez zapisywania?", "Jesteś pewnien, że chesz wyjść bez zapisywania?", "Wyjdź", "Zostań"))
+                await Navigation.PopModalAsync();
+
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            DisplayAlert("Chcesz wyjść bez zapisywania?", "Jesteś pewnien, że chesz wyjść bez zapisywania?", "Wyjdź", "Zostań");
+                return true;
+
+        }
+
+
 
     }
 }
