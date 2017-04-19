@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Codziennik.Views
@@ -20,7 +20,6 @@ namespace Codziennik.Views
 
         public EditEntryPage(Models.Entry passedEntry)
         {       
-
             if(app.StoredData == null)
             {
                 Entry = passedEntry;
@@ -41,10 +40,10 @@ namespace Codziennik.Views
             var layout = new StackLayout
             {
                 Children = {
-                    new Label { Text ="Edytuj wpis: "+ entry.EntryDateString, FontSize = 20 }
+                    new Label { Text ="Edytuj wpis: "+ Entry.EntryDateString, FontSize = 20, HorizontalTextAlignment = TextAlignment.Center }
                 },
                 Spacing = 10,
-                Margin = new Thickness(20, 5)
+                Margin = new Thickness(20, 20)
             };
 
 
@@ -88,8 +87,12 @@ namespace Codziennik.Views
 
         private async void CancelButtonClickedAsync(object sender, EventArgs e)
         {
-            if (await DisplayAlert("Chcesz wyjść bez zapisywania?", "Jesteś pewnien, że chesz wyjść bez zapisywania?", "Wyjdź", "Zostań"))
+            if (await DisplayAlert("Wyjść bez zapisywania?", "Jesteś pewnien, że chesz wyjść bez zapisywania?", "Wyjdź", "Zostań"))
+            {
+                app.StoredData = null;
                 await Navigation.PopModalAsync();
+            }
+
 
         }
 
@@ -129,10 +132,9 @@ namespace Codziennik.Views
 
         protected override bool OnBackButtonPressed()
         {
-            if (DisplayAlert("Chcesz wyjść bez zapisywania?", "Jesteś pewnien, że chesz wyjść bez zapisywania?", "Wyjdź", "Zostań").Result == true)
-                return true;
-            else
-                return false;
+
+            DisplayAlert("Zapisz lub odrzuć", "Zapisz lub odrzuć zaminy klikając przycisk na końcu listy pytań", "OK");
+            return true;
         }
 
     }

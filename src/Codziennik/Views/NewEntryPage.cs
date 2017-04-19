@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Codziennik.Views
@@ -76,10 +76,10 @@ namespace Codziennik.Views
             var layout = new StackLayout
             {
                 Children = {
-                    new Label { Text = "Opowiedz o swoim dniu:", FontSize = 20 }
+                    new Label { Text = "Opowiedz o swoim dniu:", FontSize = 20, HorizontalTextAlignment = TextAlignment.Center }
                 },
                 Spacing = 10,
-                Margin = new Thickness(20, 5)
+                Margin = new Thickness(20, 20)
             };
 
             int i = 0;
@@ -125,16 +125,19 @@ namespace Codziennik.Views
 
         private async void CancelButtonClickedAsync(object sender, EventArgs e)
         {
-            if (await DisplayAlert("Chcesz wyjść bez zapisywania?", "Jesteś pewnien, że chesz wyjść bez zapisywania?", "Wyjdź", "Zostań"))
+            if (await DisplayAlert("Wyjść bez zapisywania?", "Jesteś pewnien, że chesz wyjść bez zapisywania?", "Wyjdź", "Zostań"))
+            {
+                app.StoredData = null;
                 await Navigation.PopModalAsync();
+            }
+                
 
         }
 
         protected override bool OnBackButtonPressed()
         {
-            DisplayAlert("Chcesz wyjść bez zapisywania?", "Jesteś pewnien, że chesz wyjść bez zapisywania?", "Wyjdź", "Zostań");
-                return true;
-
+            DisplayAlert("Zapisz lub odrzuć", "Zapisz lub odrzuć zaminy klikając przycisk na końcu listy pytań", "OK");
+            return true;
         }
 
 
