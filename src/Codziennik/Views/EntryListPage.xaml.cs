@@ -42,7 +42,7 @@ namespace Codziennik.Views
             };
             toolbarItem.Clicked += async (sender, e) =>
             {
-                await Navigation.PushAsync(new NewEntryPage());
+                await Navigation.PushModalAsync(new NewEntryPage());
             };
             ToolbarItems.Add(toolbarItem);
             

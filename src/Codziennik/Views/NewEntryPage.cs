@@ -16,22 +16,11 @@ namespace Codziennik.Views
         Models.Entry entry = null;
 
         App app = App.Current as App;
-        bool propertiesTaken = false;
-
-        
+        bool propertiesTaken = false;        
 
         public NewEntryPage()
         {
 
-            
-            Title = "Dodaj nowy wpis";
-
-            var accepptToolbarItem = new ToolbarItem
-            {
-                Text = "Zapisz"
-            };
-            accepptToolbarItem.Clicked += SaveButtonClicked;
-            ToolbarItems.Add(accepptToolbarItem);
         }
 
         async void SaveButtonClicked(object sender, EventArgs e)

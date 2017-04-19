@@ -53,7 +53,7 @@ namespace Codziennik.Views
             toolbarItemEdit.Clicked += async (sender, e) =>
             {
                 edited = true;
-                await Navigation.PushAsync(new EditEntryPage(entry));
+                await Navigation.PushModalAsync(new EditEntryPage(entry));
             };
             ToolbarItems.Add(toolbarItemEdit);
 

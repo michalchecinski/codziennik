@@ -27,16 +27,6 @@ namespace Codziennik.Views
                 entry = passedEntry;
             }
 
-            Title = "Edytuj wpis";
-
-
-            var accepptToolbarItem = new ToolbarItem
-            {
-                Text = "Zapisz"                
-            };
-            accepptToolbarItem.Clicked += SaveButtonClicked;
-            ToolbarItems.Add(accepptToolbarItem);
-
         }
 
         protected override void OnAppearing()
@@ -53,7 +43,7 @@ namespace Codziennik.Views
             var layout = new StackLayout
             {
                 Children = {
-                    new Label { Text = entry.EntryDateString, FontSize = 20 }
+                    new Label { Text ="Edytuj wpis: "+ entry.EntryDateString, FontSize = 20 }
                 },
                 Spacing = 10,
                 Margin = new Thickness(20, 5)
