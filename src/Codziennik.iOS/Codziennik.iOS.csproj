@@ -144,7 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Codziennik\Codziennik.csproj">
-      <Project>{1e6d2f3b-0118-4ed2-bb5a-82c9ad6aeb28}</Project>
+      <Project>{D1DA1E09-48FB-4A94-A1BF-0B6FE415C155}</Project>
       <Name>Codziennik</Name>
     </ProjectReference>
   </ItemGroup>
