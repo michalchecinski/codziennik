@@ -89,6 +89,5 @@ namespace Codziennik.Views
             base.OnAppearing();
             await LoadData();
         }
-
-        }
+    }
 }

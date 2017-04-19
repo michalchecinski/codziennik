@@ -18,14 +18,16 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>                        
-                          
-                                <Label Text="{Binding EntryDateString}"
+                        <ViewCell>
+
+                            <Label Text="{Binding EntryDateString}"
                                        FontSize="Medium" 
                                        TextColor="Black" 
                                        VerticalTextAlignment="Center" 
-                                       HorizontalTextAlignment="Center"/>
-                            
+                                       HorizontalTextAlignment="Center">
+
+                            </Label>
+
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
