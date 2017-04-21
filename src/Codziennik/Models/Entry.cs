@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Codziennik.Data;
 using System.Threading.Tasks;
+using Codziennik.RESX;
 
 namespace Codziennik.Models
 {

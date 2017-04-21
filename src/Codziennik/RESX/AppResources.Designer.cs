@@ -71,6 +71,15 @@ namespace Codziennik.RESX {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Insighter.
+        /// </summary>
+        public static string AppName {
+            get {
+                return ResourceManager.GetString("AppName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
