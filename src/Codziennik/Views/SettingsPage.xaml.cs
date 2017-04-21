@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Codziennik.RESX;
 
 namespace Codziennik.Views
 {
@@ -30,17 +31,15 @@ namespace Codziennik.Views
             }
             catch (Exception)
             {
-                await DisplayAlert("Błąd!", "Nie udało się odczytać zapisanych pytań. Zostały przywrócone domyślne pytania.", "OK");
+                await DisplayAlert(AppResources.Error, AppResources.ReadQuestionsError, "OK");
             }
             
 
             if (Questions == null || Questions.Count == 0)
             {
-                Questions = new List<string>
-                {
-                    "Za co jestem wdzięczny?",
-                    "Wczorajsze zwycięstwo"
-                };
+                Questions = new List<string>(
+                               AppResources.DefaultQuestions.Split(new string[] { "\n" },
+                               StringSplitOptions.RemoveEmptyEntries));
             }
 
             QuestionsEditor.Text = String.Join("\n", Questions);
@@ -55,13 +54,11 @@ namespace Codziennik.Views
             if (QuestionsEditor.Text == String.Empty || QuestionsEditor.Text == null)
             {
 
-                await DisplayAlert("Brak pytań!", "Pytania zostały ustawione na domyślne", "OK");
+                await DisplayAlert(AppResources.QuestionLack, AppResources.QuestionsLackDescription, "OK");
 
-                Questions = new List<string>
-                {
-                    "Za co jestem wdzięczny?",
-                    "Wczorajsze zwycięstwo"
-                };
+                Questions = new List<string>(
+                               AppResources.DefaultQuestions.Split(new string[] { "\n" },
+                               StringSplitOptions.RemoveEmptyEntries));
             }
             else
             {
@@ -79,7 +76,7 @@ namespace Codziennik.Views
             }
             catch (Exception)
             {
-                await DisplayAlert("Błąd!", "Nie udało się zapisać pytań. Skontaktuj się z twórcą aplikacji", "OK");
+                await DisplayAlert(AppResources.Error, AppResources.SaveQuestionsError, "OK");
             }
             
 
@@ -87,13 +84,11 @@ namespace Codziennik.Views
 
         private void RestoreDefaultQuestions(object sender, EventArgs e)
         {
-            List<string> Questions = new List<string>
-                {
-                    "Za co jestem wdzięczny?",
-                    "Wczorajsze zwycięstwo"
-                };
+            List<string> Questions = new List<string>(
+                               AppResources.DefaultQuestions.Split(new string[] { "\n" },
+                               StringSplitOptions.RemoveEmptyEntries));
 
-            QuestionsEditor.Text = String.Join("\n", Questions);
+            QuestionsEditor.Text = AppResources.DefaultQuestions;
         }
     }
 }

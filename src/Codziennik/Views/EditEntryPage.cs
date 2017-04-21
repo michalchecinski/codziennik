@@ -1,4 +1,5 @@
 ﻿using Codziennik.Data;
+using Codziennik.RESX;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace Codziennik.Views
             var layout = new StackLayout
             {
                 Children = {
-                    new Label { Text ="Edytuj wpis: "+ Entry.EntryDateString, FontSize = 20, HorizontalTextAlignment = TextAlignment.Center }
+                    new Label { Text = AppResources.EditEntry + Entry.EntryDateString, FontSize = 20, HorizontalTextAlignment = TextAlignment.Center }
                 },
                 Spacing = 10,
                 Margin = new Thickness(20, 20)
@@ -60,9 +61,9 @@ namespace Codziennik.Views
             }
 
 
-            var saveButton = new Button() { Text = "Zapisz" };
+            var saveButton = new Button() { Text = AppResources.Save };
             saveButton.Clicked += SaveButtonClicked;
-            var cancelButton = new Button() { Text = "Anuluj" };
+            var cancelButton = new Button() { Text = AppResources.Cancel };
             cancelButton.Clicked += CancelButtonClickedAsync;
             var horizontalLayout = new StackLayout
             {
@@ -87,7 +88,7 @@ namespace Codziennik.Views
 
         private async void CancelButtonClickedAsync(object sender, EventArgs e)
         {
-            if (await DisplayAlert("Wyjść bez zapisywania?", "Jesteś pewnien, że chesz wyjść bez zapisywania?", "Wyjdź", "Zostań"))
+            if (await DisplayAlert(AppResources.ExitQuestionTitle, AppResources.ExitQuestionDescription, AppResources.ExitQuestionExit, AppResources.ExitQuestionStay))
             {
                 app.StoredData = null;
                 await Navigation.PopModalAsync();
@@ -111,7 +112,7 @@ namespace Codziennik.Views
             }
             catch(Exception ex)
             {
-                await DisplayAlert("Błąd", "Nie udało się zapisać wpisu. Skontaktuj się z twórcą aplikacji", "OK");
+                await DisplayAlert(AppResources.Error, AppResources.ErrorMessageSaveFile, "OK");
             }
 
             await Navigation.PopModalAsync();
@@ -133,7 +134,7 @@ namespace Codziennik.Views
         protected override bool OnBackButtonPressed()
         {
 
-            DisplayAlert("Zapisz lub odrzuć", "Zapisz lub odrzuć zaminy klikając przycisk na końcu listy pytań", "OK");
+            DisplayAlert(AppResources.SaveOrDeleteTitle, AppResources.SaveOrDeleteDescription, "OK");
             return true;
         }
 

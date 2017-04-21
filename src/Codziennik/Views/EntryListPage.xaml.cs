@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Codziennik.Models;
 using Xamarin.Forms;
 using Codziennik.Data;
+using Codziennik.RESX;
 
 namespace Codziennik.Views
 {
@@ -26,7 +27,7 @@ namespace Codziennik.Views
 
             var settingsToolbarItem = new ToolbarItem
             {
-                Text = "Ustawienia",
+                Text = AppResources.Settings,
                 Icon="settings.png"
             };
             settingsToolbarItem.Clicked += async (sender, e) =>
@@ -37,7 +38,7 @@ namespace Codziennik.Views
 
             var toolbarItem = new ToolbarItem
             {
-                Text = "Dodaj wpis",
+                Text = AppResources.Add,
                 Icon="add.png"
             };
             toolbarItem.Clicked += async (sender, e) =>
@@ -72,14 +73,14 @@ namespace Codziennik.Views
             }
             catch (Exception)
             {
-                await DisplayAlert("Błąd", "Nie udało się odczytać wpisów. Skontaktuj się z twórcą aplikacji", "OK");
+                await DisplayAlert(AppResources.Error, AppResources.ReadEntriesFailed, "OK");
             }
             
 
             entryListView.ItemsSource = list;
 
             if (list.Count == 0)
-                await DisplayAlert("Brak wpisów", "Dodaj swój pierwszy wpis klikając +", "OK");
+                await DisplayAlert(AppResources.EntriesLack, AppResources.EntriesLackDescription, "OK");
 
             IsBusy = false;
         }

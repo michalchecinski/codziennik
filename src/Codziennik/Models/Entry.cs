@@ -37,11 +37,9 @@ namespace Codziennik.Models
 
             if (Questions == null || Questions.Count == 0)
             {
-                this.Questions = new List<string>
-                {
-                    "Za co jestem wdzięczny?",
-                    "Wczorajsze zwycięstwo"
-                };
+                this.Questions = new List<string>(
+                               AppResources.DefaultQuestions.Split(new string[] { "\n" },
+                               StringSplitOptions.RemoveEmptyEntries));
             }
         }
 

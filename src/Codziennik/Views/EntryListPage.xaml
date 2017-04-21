@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Codziennik.RESX"
              x:Class="Codziennik.Views.EntryListPage"
              x:Name="EntryListContentPage"
              Padding="0,10,0,0"
-             Title = "Lista wpisów">
+             Title = "{x:Static local:AppResources.EntriesList}">
   
   
   <ContentPage.Content>
@@ -13,8 +14,7 @@
             <ListView x:Name="entryListView" 
                       VerticalOptions="FillAndExpand" 
                       SeparatorVisibility="Default" 
-                      SeparatorColor="Black"  
-                       >
+                      SeparatorColor="Black"  >
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
