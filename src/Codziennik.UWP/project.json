@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "HockeySDK.Xamarin": "4.1.2",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
     "PCLStorage": "1.0.2",
     "Xamarin.Forms": "2.0.0.6482"

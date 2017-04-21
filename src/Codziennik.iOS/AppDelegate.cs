@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using HockeyApp.iOS;
 
 namespace Codziennik.iOS
 {
@@ -24,6 +25,11 @@ namespace Codziennik.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+
+            var manager = BITHockeyManager.SharedHockeyManager;
+            manager.Configure("7a755c00d8484637b92c76210ccb7274");
+            manager.StartManager();
+            manager.Authenticator.AuthenticateInstallation();
 
             return base.FinishedLaunching(app, options);
         }
