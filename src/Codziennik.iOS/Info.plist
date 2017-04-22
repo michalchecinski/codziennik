@@ -50,15 +50,13 @@
 	<array>
 		<string>pl</string>
 	</array>
-	<key>LSHasLocalizedDisplayName</key>
-	<true/>
 	<key>CFBundleIdentifier</key>
 	<string>pl.michalchecinski.Insighter</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>Insighter</string>
 	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>Insighter</string>
 </dict>
 </plist>
