@@ -53,7 +53,7 @@ namespace Codziennik.Views
                 entry.Answers.Add(editor.Text);
             }
 
-            entry.SetEntryDateNow();
+            //entry.SetEntryDateNow();
 
             app.StoredData = JsonConvert.SerializeObject(entry);
         }
