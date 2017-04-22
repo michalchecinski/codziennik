@@ -4,5 +4,7 @@
 <dict>
 	<key>CFBundleDisplayName</key>
 	<string>Codziennik</string>
+	<key>CFBundleName</key>
+	<string>Codziennik</string>
 </dict>
 </plist>
