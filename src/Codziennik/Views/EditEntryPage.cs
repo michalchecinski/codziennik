@@ -1,7 +1,9 @@
 ﻿using Codziennik.Data;
+using Codziennik.RESX;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
@@ -13,7 +15,7 @@ namespace Codziennik.Views
     public class EditEntryPage : ContentPage
     {
         List<Editor> answersEditors = new List<Editor>();
-        public Models.Entry Entry { get; private set; } = null;
+        public Models.Entry entry { get; private set; } = null;
 
         App app = App.Current as App;
 
@@ -22,7 +24,7 @@ namespace Codziennik.Views
         {       
             if(app.StoredData == null)
             {
-                Entry = passedEntry;
+                entry = passedEntry;
             }
         }
 
@@ -32,7 +34,7 @@ namespace Codziennik.Views
 
             if (app.StoredData != null)
             {
-                Entry = JsonConvert.DeserializeObject<Models.Entry>(app.StoredData);
+                entry = JsonConvert.DeserializeObject<Models.Entry>(app.StoredData);
                 app.StoredData = null;
             }
 
@@ -40,7 +42,7 @@ namespace Codziennik.Views
             var layout = new StackLayout
             {
                 Children = {
-                    new Label { Text ="Edytuj wpis: "+ Entry.EntryDateString, FontSize = 20, HorizontalTextAlignment = TextAlignment.Center }
+                    new Label { Text = AppResources.EditEntry + " " + entry.EntryDateString, FontSize = 20, HorizontalTextAlignment = TextAlignment.Center }
                 },
                 Spacing = 10,
                 Margin = new Thickness(20, 20)
@@ -48,7 +50,7 @@ namespace Codziennik.Views
 
 
 
-            var questionsAndAnswers = Entry.Questions.Zip(Entry.Answers, (q, a) => new { Question = q, Answer = a });
+            var questionsAndAnswers = entry.Questions.Zip(entry.Answers, (q, a) => new { Question = q, Answer = a });
             foreach (var qa in questionsAndAnswers)
             {
                 var questionLabel = new Label { Text = qa.Question, HorizontalTextAlignment = TextAlignment.Center };
@@ -60,9 +62,9 @@ namespace Codziennik.Views
             }
 
 
-            var saveButton = new Button() { Text = "Zapisz" };
+            var saveButton = new Button() { Text = AppResources.Save };
             saveButton.Clicked += SaveButtonClicked;
-            var cancelButton = new Button() { Text = "Anuluj" };
+            var cancelButton = new Button() { Text = AppResources.Cancel };
             cancelButton.Clicked += CancelButtonClickedAsync;
             var horizontalLayout = new StackLayout
             {
@@ -87,31 +89,30 @@ namespace Codziennik.Views
 
         private async void CancelButtonClickedAsync(object sender, EventArgs e)
         {
-            if (await DisplayAlert("Wyjść bez zapisywania?", "Jesteś pewnien, że chesz wyjść bez zapisywania?", "Wyjdź", "Zostań"))
+            if (await DisplayAlert(AppResources.ExitQuestionTitle, AppResources.ExitQuestionDescription, AppResources.ExitQuestionExit, AppResources.ExitQuestionStay))
             {
                 app.StoredData = null;
                 await Navigation.PopModalAsync();
             }
-
 
         }
 
         async void SaveButtonClicked(object sender, EventArgs e)
         {
             app.StoredData = null;
-            Entry.Answers = new List<string>();
+            entry.Answers = new List<string>();
             foreach (Editor editor in answersEditors)
             {
-                Entry.Answers.Add(editor.Text);
+                entry.Answers.Add(editor.Text);
             }
 
             try
             {
-                await EntryDataStorage.WriteEditedEntryAsync(Entry);
+                await EntryDataStorage.WriteEditedEntryAsync(entry);
             }
-            catch(Exception ex)
+            catch(IOException ex)
             {
-                await DisplayAlert("Błąd", "Nie udało się zapisać wpisu. Skontaktuj się z twórcą aplikacji", "OK");
+                await DisplayAlert(AppResources.Error, AppResources.ErrorMessageSaveFile, "OK");
             }
 
             await Navigation.PopModalAsync();
@@ -119,21 +120,19 @@ namespace Codziennik.Views
 
         void SaveProperties(object sender, EventArgs e)
         {
-            Entry.Answers = new List<string>();
+            entry.Answers = new List<string>();
             foreach (Editor editor in answersEditors)
             {
-                Entry.Answers.Add(editor.Text);
+                entry.Answers.Add(editor.Text);
             }
 
-            Entry.SetEntryDateNow();
-
-            app.StoredData = JsonConvert.SerializeObject(Entry);
+            app.StoredData = JsonConvert.SerializeObject(entry);
         }
 
         protected override bool OnBackButtonPressed()
         {
 
-            DisplayAlert("Zapisz lub odrzuć", "Zapisz lub odrzuć zaminy klikając przycisk na końcu listy pytań", "OK");
+            DisplayAlert(AppResources.SaveOrDeleteTitle, AppResources.SaveOrDeleteDescription, "OK");
             return true;
         }
 

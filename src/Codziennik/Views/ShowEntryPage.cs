@@ -6,6 +6,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Codziennik.RESX;
 
 namespace Codziennik.Views
 {
@@ -19,22 +20,22 @@ namespace Codziennik.Views
             passedEntry = entry;
             var toolbarItemDelete = new ToolbarItem
             {
-                Text = "Usuń",
+                Text = AppResources.Delete,
                 Icon="garbage.png"
             };
             toolbarItemDelete.Clicked += async (sender, e) =>
             {
-                bool deleteConfirmed = await DisplayAlert("Chcesz usunąć wpis?", "Uwaga! Ta operacja jest nieodwracalna", "Usuń", "Anuluj");
+                bool deleteConfirmed = await DisplayAlert(AppResources.DeleteConfirmationTitle, AppResources.DeleteConfirmationDescription, AppResources.Delete, AppResources.Cancel);
                 if (deleteConfirmed == true)
                 {
                     try
                     {
                         await EntryDataStorage.DeleteEntryAsync(entry);
-                        await DisplayAlert("Usunięto wpis", entry.EntryDateString, "OK");
+                        await DisplayAlert(AppResources.EntryDeleted, entry.EntryDateString, "OK");
                     }
                     catch (Exception)
                     {
-                        await DisplayAlert("Błąd", "Nie udało się usunąć wpisu. Skontaktuj się z twórcą aplikacji", "OK");
+                        await DisplayAlert(AppResources.Error, AppResources.DeleteError, "OK");
                     }
                     finally
                     {
@@ -47,7 +48,7 @@ namespace Codziennik.Views
 
             var toolbarItemEdit = new ToolbarItem
             {
-                Text = "Edytuj",
+                Text = AppResources.Edit,
                 Icon="edit.png"
             };
             toolbarItemEdit.Clicked += async (sender, e) =>
@@ -103,7 +104,7 @@ namespace Codziennik.Views
                 }
                 catch (Exception)
                 {
-                    DisplayAlert("Błąd", "Nie udało się odczytać wpisu. Skontaktuj się z twórcą aplikacji", "OK");
+                    DisplayAlert(AppResources.Error,AppResources.ReadEntryError, "OK");
                 }
             }
         }

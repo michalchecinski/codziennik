@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Codziennik.RESX"
              x:Class="Codziennik.Views.SettingsPage"
-             Title="Ustawienia">
+             Title="{x:Static local:AppResources.Settings}">
 
     <ScrollView Margin="10,2,10,2">
 
         <StackLayout>
-        
-            <Label Text="Możesz zmienić pytania poniżej" 
+
+            <Label Text="{x:Static local:AppResources.ChangeQuestions}" 
                    FontSize="20" 
                    TextColor="Black"
                    HorizontalOptions="Center"/>
@@ -19,13 +20,13 @@
                     HeightRequest="200"
                     FontSize="15"/>
 
-            <Button Text="Przywróć domyśle pytania" 
+            <Button Text="{x:Static local:AppResources.RestoreDefaultQuestions}" 
                     HorizontalOptions="CenterAndExpand" 
                     Margin="10,0,10,0" 
                     Clicked="RestoreDefaultQuestions" />
 
             <Label
-                Text="Ikony wykonane przez Madebyoliver ze strony www.flaticon.com na licencji Creative Commons BY 3.0"
+                Text="{x:Static local:AppResources.IconsCredentials}"
                 TextColor="Gray"
                 FontSize="10" />
 

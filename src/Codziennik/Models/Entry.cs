@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Codziennik.Data;
 using System.Threading.Tasks;
+using Codziennik.RESX;
 
 namespace Codziennik.Models
 {
@@ -37,11 +38,9 @@ namespace Codziennik.Models
 
             if (Questions == null || Questions.Count == 0)
             {
-                this.Questions = new List<string>
-                {
-                    "Za co jestem wdzięczny?",
-                    "Wczorajsze zwycięstwo"
-                };
+                this.Questions = new List<string>(
+                               AppResources.DefaultQuestions.Split(new string[] { "\n" },
+                               StringSplitOptions.RemoveEmptyEntries));
             }
         }
 
