@@ -96,6 +96,8 @@
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork@2x" />
     <None Include="packages.config" />
+    <None Include="Resources\InfoPList.strings" />
+    <None Include="Resources\pl.lproj\InfoPList.strings" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-Portrait.png" />

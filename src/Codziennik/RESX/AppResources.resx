@@ -120,9 +120,6 @@
   <data name="Add" xml:space="preserve">
     <value>Add entry</value>
   </data>
-  <data name="AppName" xml:space="preserve">
-    <value>Insighter</value>
-  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
