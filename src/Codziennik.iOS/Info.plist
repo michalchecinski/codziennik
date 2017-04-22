@@ -20,8 +20,6 @@
 	</array>
 	<key>MinimumOSVersion</key>
 	<string>6.0</string>
-	<key>CFBundleDisplayName</key>
-	<string>Codziennik</string>
 	<key>CFBundleIdentifier</key>
 	<string>pl.michalchecinski.Codziennik</string>
 	<key>CFBundleVersion</key>
@@ -52,5 +50,13 @@
 	<string>1.0.0</string>
 	<key>UIMainStoryboardFile</key>
 	<string>LaunchScreen</string>
+	<key>CFBundleDisplayName</key>
+	<string>Insighter</string>
+	<key>CFBundleLocalizations</key>
+<array>
+    <string>pl</string>
+</array>
+<key>CFBundleDevelopmentRegion</key>
+<string>en</string>
 </dict>
 </plist>
