@@ -54,9 +54,9 @@
 	<string>pl.michalchecinski.Insighter</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-	<key>CFBundleName</key>
-	<string>Insighter</string>
 	<key>CFBundleDisplayName</key>
 	<string>Insighter</string>
+	<key>LSHasLocalizedDisplayName</key>
+	<true/>
 </dict>
 </plist>
