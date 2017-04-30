@@ -157,6 +157,9 @@ Wczorajsze zwycięstwo</value>
   <data name="EntriesList" xml:space="preserve">
     <value>Lista wpisów</value>
   </data>
+  <data name="EntriesWithDate" xml:space="preserve">
+    <value>wpisów o podanej dacie:</value>
+  </data>
   <data name="EntryDeleted" xml:space="preserve">
     <value>Wpis usunięty</value>
   </data>
@@ -178,8 +181,14 @@ Wczorajsze zwycięstwo</value>
   <data name="ExitQuestionTitle" xml:space="preserve">
     <value>Wyjść bez zapisywania?</value>
   </data>
+  <data name="Found" xml:space="preserve">
+    <value>Znaleziono</value>
+  </data>
   <data name="IconsCredentials" xml:space="preserve">
     <value>Ikony wykonane przez Madebyoliver ze strony www.flaticon.com na licencji Creative Commons BY 3.0</value>
+  </data>
+  <data name="NoneEntriesWithDate" xml:space="preserve">
+    <value>Brak wpisów o podanej dacie.</value>
   </data>
   <data name="QuestionLack" xml:space="preserve">
     <value>Brak pytań</value>
@@ -210,6 +219,12 @@ Wczorajsze zwycięstwo</value>
   </data>
   <data name="SaveQuestionsError" xml:space="preserve">
     <value>Nie udało się zapisać pytań. Skontaktuj się z twórcą aplikacji</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Szukaj</value>
+  </data>
+  <data name="SearchEntryTitle" xml:space="preserve">
+    <value>Szukaj wpisu</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Ustawienia</value>

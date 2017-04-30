@@ -57,6 +57,7 @@
       <DependentUpon>EntryListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NewEntryPage.cs" />
+    <Compile Include="Views\SearchDate.cs" />
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
@@ -102,6 +103,7 @@
     <EmbeddedResource Include="RESX\AppResources.pl.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.pl.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="RESX\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
