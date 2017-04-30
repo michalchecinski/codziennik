@@ -180,6 +180,15 @@ namespace Codziennik.RESX {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to entries with that date:.
+        /// </summary>
+        public static string EntriesWithDate {
+            get {
+                return ResourceManager.GetString("EntriesWithDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Entry deleted.
         /// </summary>
         public static string EntryDeleted {
@@ -243,11 +252,29 @@ namespace Codziennik.RESX {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Found.
+        /// </summary>
+        public static string Found {
+            get {
+                return ResourceManager.GetString("Found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Icons made by Madebyoliver from www.flaticon.com on license Creative Commons BY 3.0.
         /// </summary>
         public static string IconsCredentials {
             get {
                 return ResourceManager.GetString("IconsCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None entries with that date..
+        /// </summary>
+        public static string NoneEntriesWithDate {
+            get {
+                return ResourceManager.GetString("NoneEntriesWithDate", resourceCulture);
             }
         }
         
@@ -338,6 +365,24 @@ namespace Codziennik.RESX {
         public static string SaveQuestionsError {
             get {
                 return ResourceManager.GetString("SaveQuestionsError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Find entry.
+        /// </summary>
+        public static string SearchEntryTitle {
+            get {
+                return ResourceManager.GetString("SearchEntryTitle", resourceCulture);
             }
         }
         

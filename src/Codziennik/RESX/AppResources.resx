@@ -157,6 +157,9 @@ Yesterday's triumph</value>
   <data name="EntriesList" xml:space="preserve">
     <value>Entries list:</value>
   </data>
+  <data name="EntriesWithDate" xml:space="preserve">
+    <value>entries with that date:</value>
+  </data>
   <data name="EntryDeleted" xml:space="preserve">
     <value>Entry deleted</value>
   </data>
@@ -178,8 +181,14 @@ Yesterday's triumph</value>
   <data name="ExitQuestionTitle" xml:space="preserve">
     <value>Exit without saving?</value>
   </data>
+  <data name="Found" xml:space="preserve">
+    <value>Found</value>
+  </data>
   <data name="IconsCredentials" xml:space="preserve">
     <value>Icons made by Madebyoliver from www.flaticon.com on license Creative Commons BY 3.0</value>
+  </data>
+  <data name="NoneEntriesWithDate" xml:space="preserve">
+    <value>None entries with that date.</value>
   </data>
   <data name="QuestionLack" xml:space="preserve">
     <value>Lack of questions</value>
@@ -210,6 +219,12 @@ Yesterday's triumph</value>
   </data>
   <data name="SaveQuestionsError" xml:space="preserve">
     <value>Save questions failed. Contact with the author of the app</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SearchEntryTitle" xml:space="preserve">
+    <value>Find entry</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>

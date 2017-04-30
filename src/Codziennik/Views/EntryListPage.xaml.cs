@@ -13,6 +13,8 @@ namespace Codziennik.Views
     public partial class EntryListPage : ContentPage
     {
 
+        List<Models.Entry> list = null;
+
         public EntryListPage()
         {
             InitializeComponent();
@@ -36,6 +38,17 @@ namespace Codziennik.Views
             };
             ToolbarItems.Add(settingsToolbarItem);
 
+            var searchToolbarItem = new ToolbarItem
+            {
+                Text = AppResources.Search,
+                Icon="search.png"
+            };
+            searchToolbarItem.Clicked += async (sender, e) =>
+            {
+                await Navigation.PushAsync(new SearchDate(list));
+            };
+            ToolbarItems.Add(searchToolbarItem);
+
             var toolbarItem = new ToolbarItem
             {
                 Text = AppResources.Add,
@@ -46,7 +59,6 @@ namespace Codziennik.Views
                 await Navigation.PushModalAsync(new NewEntryPage());
             };
             ToolbarItems.Add(toolbarItem);
-            
 
             entryListView.ItemTapped += async (sender, e) =>
             {
@@ -64,8 +76,6 @@ namespace Codziennik.Views
                 return;
 
             IsBusy = true;
-
-            List<Models.Entry> list = null;
 
             try
             {
